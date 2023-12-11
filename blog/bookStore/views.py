@@ -38,14 +38,14 @@ def home(request):
         "in_orders": in_orders,
         "out_orders": out_orders,
     }
-    return render(request, "bookStore/dashboard.html", context)
+    return render(request, "bookstore/dashboard.html", context)
 
 
 @login_required(login_url="login")
 @forAdmins
 def books(request):
     books = Book.objects.all()
-    return render(request, "bookStore/books.html", {"books": books})
+    return render(request, "bookstore/books.html", {"books": books})
 
 
 @login_required(login_url="login")
@@ -63,7 +63,7 @@ def customer(request, pk):
         "num_orders": num_orders,
         "myFilter": searchFilter,
     }
-    return render(request, "bookStore/customer.html", context)
+    return render(request, "bookstore/customer.html", context)
 
 
 @login_required(login_url="login")
@@ -85,7 +85,7 @@ def create(request, pk):
             formset.save()
             return redirect("home")
     context = {"formset": formset}
-    return render(request, "bookStore/my_order_form.html", context)
+    return render(request, "bookstore/my_order_form.html", context)
 
 
 @login_required(login_url="login")
@@ -100,7 +100,7 @@ def update(request, pk):
             form.save()
             return redirect("/")
     context = {"form": form}
-    return render(request, "bookStore/order_form.html", context)
+    return render(request, "bookstore/order_form.html", context)
 
 
 @login_required(login_url="login")
@@ -111,7 +111,7 @@ def delete(request, pk):
         order.delete()
         return redirect("/")
     context = {"item": order}
-    return render(request, "bookStore/delete_form.html", context)
+    return render(request, "bookstore/delete_form.html", context)
 
 
 @notLoggedUsers
@@ -139,7 +139,7 @@ def register(request):
             else:
                 messages.error(request, "Invalid reCAPTCHA. Please try again.")
     context = {"form": form}
-    return render(request, "bookStore/register.html", context)
+    return render(request, "bookstore/register.html", context)
 
 
 @notLoggedUsers
@@ -154,7 +154,7 @@ def UserLogin(request):
         else:
             messages.info(request, "Username or Password is incorrect")
     context = {}
-    return render(request, "bookStore/login.html", context)
+    return render(request, "bookstore/login.html", context)
 
 
 @login_required(login_url="login")
@@ -181,7 +181,7 @@ def userProfile(request):
         "in_orders": in_orders,
         "out_orders": out_orders,
     }
-    return render(request, "bookStore/profile.html", context)
+    return render(request, "bookstore/profile.html", context)
 
 
 # form.as_p: to show the form as paragraphs
@@ -194,4 +194,4 @@ def profileInfo(request):
         if form.is_valid():
             form.save()
     context = {"form": form}
-    return render(request, "bookStore/profile_info.html", context)
+    return render(request, "bookstore/profile_info.html", context)
